@@ -1,0 +1,12 @@
+package br.devmanager.dao;
+
+import java.sql.Connection;
+
+public class ProjetoDao {
+	private Connection con = null;
+
+	public ProjetoDao() {
+		con = ConnectionFactory.getConnection();
+	}
+	
+}

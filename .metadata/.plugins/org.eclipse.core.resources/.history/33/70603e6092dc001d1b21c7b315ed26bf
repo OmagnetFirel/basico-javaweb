@@ -1,0 +1,30 @@
+package br.devmanager.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import br.devmanager.model.ChefeDeTecnologia;
+
+public class ChefeDeTecnologiaDAO {
+private Connection con = null;
+	
+	public ChefeDeTecnologiaDAO() {
+		con = ConnectionFactory.getConnection();
+	}
+	
+	public void adicionar(ChefeDeTecnologia cto) throws SQLException {
+		String sql = "insert into cto(nome) values (?)";
+		System.out.println(con);
+		PreparedStatement stmt = con.prepareStatement(sql);
+		stmt.setString(1, cto.getNome());
+		stmt.execute();
+		stmt.close();
+		con.close();
+		
+	}
+	
+	public void promoverFuncionario() throws SQLException{
+		String sql = "insert into gestor(nota,funcionarioId) values(?,?)";
+	}
+}

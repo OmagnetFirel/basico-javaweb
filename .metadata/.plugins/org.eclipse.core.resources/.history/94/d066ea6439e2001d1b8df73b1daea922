@@ -1,0 +1,77 @@
+package br.devmanager.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import br.devmanager.model.Equipe;
+
+
+public class EquipeDao {
+	private Connection con = null;
+	
+	public EquipeDao() {
+		con = ConnectionFactory.getConnection();
+	}
+	
+	public void adicionar(Equipe equipe) throws SQLException {
+		
+		String sql = "insert into equipe"
+				+ "(nome) "
+				+ "values (?)";
+		PreparedStatement stmt = con.prepareStatement(sql);
+		
+		
+		stmt.setString(1, equipe.getNome());
+		
+		stmt.execute();
+		stmt.close();
+		con.close();
+		
+	}
+	
+	public Equipe buscarUm(int id) throws SQLException {
+		String sql = "select "
+				+ "id,nome"
+				+ " from equipe "
+				+ "where id = ?";
+		PreparedStatement stmt = con.prepareStatement(sql);
+		stmt.setInt(1,id);
+		ResultSet rs = stmt.executeQuery();
+		Equipe equipe = null;
+		if (rs.next()) {
+			try {
+				equipe = new Equipe(
+						rs.getInt("id"),
+						rs.getString("nome")
+				);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		stmt.close();
+		con.close();
+		return equipe; 
+	}
+	
+	public List<Equipe> buscarTodos() throws SQLException {
+		String sql = "select id, nome from equipe";
+		PreparedStatement stmt = con.prepareStatement(sql);
+		ResultSet rs = stmt.executeQuery();
+		List<Equipe> equipes = new ArrayList<Equipe>();
+		while (rs.next()) {
+			Equipe equipe = new Equipe();
+			equipe.setId(rs.getInt("id"));
+			equipe.setNome(rs.getString("nome"));
+			equipes.add(equipe);
+		}
+		stmt.close();
+		con.close();
+		return equipes;
+		
+	}
+	
+}

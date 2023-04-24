@@ -1,0 +1,44 @@
+package br.devmanager.controller;
+
+import java.io.IOException;
+import java.util.Date;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import br.devmanager.model.Projeto;
+import br.devmanager.dao.ProjetoDao;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
+@WebServlet("/CadastrarProjeto")
+public class CadastrarProjeto extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+    public CadastrarProjeto() {
+        super();
+    }
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String nome = request.getParameter("nome");
+		String data_inicio = request.getParameter("data_inicio");
+		String data_fim = request.getParameter("data_fim");
+		String equipe = request.getParameter("equipe");
+
+		System.out.println("nome: " + nome);
+		System.out.println("data_inicio: " + data_inicio);
+		System.out.println("data_fim: " + data_fim);
+		System.out.println("equipe: " + equipe);
+
+
+		Projeto projeto = new Projeto();
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+
+}

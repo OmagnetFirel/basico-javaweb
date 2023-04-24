@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<a href="ListarTodosDesenvolvedores?np=/listarDesenvolvedors.jsp">Lista de Desenvolvedor</a><br>
+	<a href="ListarTodosProjetos?np=/listarProjetos.jsp">Lista de Projetos</a>
+
+</body>
+</html>

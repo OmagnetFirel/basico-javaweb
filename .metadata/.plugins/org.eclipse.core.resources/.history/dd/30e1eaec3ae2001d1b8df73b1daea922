@@ -1,0 +1,50 @@
+package br.devmanager.controller;
+
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import br.devmanager.dao.ProjetoDao;
+import br.devmanager.model.Projeto;
+
+
+@WebServlet("/VerificarProjeto")
+public class VerificarProjeto extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+  
+    public VerificarProjeto() {
+        super();
+    }
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int equipeId = Integer.parseInt(request.getParameter("projetoId"));
+
+		
+		ProjetoDao pjDAO = new ProjetoDao();
+		Projeto projeto = null;
+		try {
+			projeto = pjDAO.buscarUm();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		String np = request.getParameter("np");
+		request.setAttribute("projetos", projetos);
+		RequestDispatcher rd = request.getRequestDispatcher(np);
+		rd.forward(request, response);
+	}
+
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+
+}

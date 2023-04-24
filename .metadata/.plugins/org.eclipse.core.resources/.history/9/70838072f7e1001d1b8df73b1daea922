@@ -1,0 +1,13 @@
+
+<!DOCTYPE html5>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>TM - Home</title>
+</head>
+<body>
+	<a href="Cadastro.html">Create</a><br>
+	<a href="Buscas.html">Read</a><br>
+		
+</body>
+</html> 

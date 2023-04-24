@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<a href="ListarTodasEquipes?np=/ListarTodosGestores?np=/frmCadastrarDesenvolvedor.jsp">Cadastrar Desenvolvedor</a><br>
+	<a href="ListarTodasEquipes?np=/frmCadastrarProjeto.jsp">Cadastrar Projeto</a><br>
+	<a href="ListarTodasEquipes?np=/ListarTodosGestores?np=/frmCadastrarDesenvolvedor.jsp">Cadastrar Desenvolvedor</a><br>
+	
+</body>
+</html>

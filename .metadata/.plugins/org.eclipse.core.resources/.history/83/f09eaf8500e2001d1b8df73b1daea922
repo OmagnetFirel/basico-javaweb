@@ -1,0 +1,48 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>DM - Todos os projetos</title>
+</head>
+<body  style="display:flex; justify-content:center; align-items:center; flex-direction:column;">
+	<div style="display:flex; justify-content:center; align-items:center;">
+		<a href="/index.html">Inicio</a>
+		<h1>Todos os Projetos</h1>
+	</div>
+	
+	<table>
+		<tr>
+			<th>id</th>
+			<th>Nome</th>
+			<th>Data Inicio</th>
+			<th>Data Fim</th>
+			<th>Equipe</th>
+		</tr>
+			
+		<c:forEach var="projeto" items="${projetos}">
+			<tr>
+				<td>
+					${projeto.id}
+				</td>
+				<td>
+					${projeto.nome}
+				</td>
+				<td>
+					${projeto.dataInicio}
+				</td>
+				<td>
+					${projeto.dataFim}
+				</td>
+				<td>
+					${projeto.equipe.nome}
+				</td>
+			</tr>
+		</c:forEach>
+		
+			
+	</table>
+</body>
+</html>

@@ -1,0 +1,33 @@
+package br.devmanager.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import br.devmanager.model.Equipe;
+
+public class EquipeDao {
+	private Connection con = null;
+	
+	public EquipeDao() {
+		con = ConnectionFactory.getConnection();
+	}
+	
+	public void adicionar(Equipe equipe) throws SQLException {
+		
+		String sql = "insert into equipe"
+				+ "(nome) "
+				+ "values (?)";
+		System.out.println(con);
+		PreparedStatement stmt = con.prepareStatement(sql);
+		
+		
+		stmt.setString(1, equipe.getNome());
+		
+		stmt.execute();
+		stmt.close();
+		con.close();
+		
+	}
+	
+}

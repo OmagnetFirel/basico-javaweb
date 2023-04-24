@@ -1,0 +1,148 @@
+package br.devmanager.dao;
+import java.util.List;
+import java.util.ArrayList;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import br.devmanager.model.Projeto;
+
+public class ProjetoDao {
+	private Connection con = null;
+
+	public ProjetoDao() {
+		con = ConnectionFactory.getConnection();
+	}
+	
+	public void adicionar(Projeto projeto) throws SQLException {
+		String sql = "insert into projeto(nome, data_inicio, data_fim, equipe_id) values (?,?,?,?)";
+		PreparedStatement stmt = con.prepareStatement(sql);
+		
+		java.sql.Date data_inicio_Convertida = null;
+		try {
+			data_inicio_Convertida = new java.sql.Date(projeto.getDataInicio().getTime());
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		java.sql.Date data_fim_Convertida = null;
+		try {
+			data_fim_Convertida = new java.sql.Date(projeto.getDataFim().getTime());
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+		stmt.setString(1, projeto.getNome());
+		stmt.setDate(2, data_inicio_Convertida);
+		stmt.setDate(3, data_fim_Convertida);
+		stmt.setInt(4, projeto.getEquipe().getId());
+		
+		stmt.execute();
+		stmt.close();
+		con.close();
+	}
+	
+	public Projeto buscarUm(int id) throws SQLException{
+		String sql = "select id, nome, data_inicio, data_fim, equipe_id from projeto where id=?";
+		PreparedStatement stmt = con.prepareStatement(sql);
+		stmt.setInt(1, id);
+		ResultSet rs = stmt.executeQuery();
+		
+		Projeto projeto = null;
+		
+		if(rs.next()) {
+			try {
+				EquipeDao equipeDao = new EquipeDao();
+				
+				
+				projeto = new Projeto(
+						rs.getInt("id"),
+						rs.getString("nome"),
+						rs.getDate("data_inicio"),
+						rs.getDate("data_fim"),
+						equipeDao.buscarUm(rs.getInt("equipe_id"))
+						);
+			}catch (Exception e) {
+				System.out.println("Error: " + e);
+			}
+		} else {
+			System.out.println("Não foi encontrado nem um proje com o id: " + id);
+		}
+		stmt.close();
+		con.close();
+		
+		return projeto;
+
+	}
+	
+	public List<Projeto> buscarTodos() throws SQLException {
+		String sql = "select id, nome, data_inicio, data_fim, equipe_id from projeto";
+		PreparedStatement stmt = con.prepareStatement(sql);
+		ResultSet rs = stmt.executeQuery();
+		
+		List<Projeto> projetos = new ArrayList<Projeto>();
+		while(rs.next()) {
+			EquipeDao equipeDao = new EquipeDao();
+
+			Projeto projeto = new Projeto(
+					rs.getInt("id"),
+					rs.getString("nome"),
+					rs.getDate("data_inicio"),
+					rs.getDate("data_fim"),
+					equipeDao.buscarUm(rs.getInt("equipe_id"))
+					);
+			
+			projetos.add(projeto);
+		}
+		
+		return projetos;
+	}
+	
+	public void atualizarDados(Projeto projeto) throws SQLException{
+		String sql = "UPDATE projeto SET "
+				+ "nome = ?,"
+				+ "data_inicio = ?, "
+				+ "data_fim = ?, "
+				+ "equipe_id = ? "
+				+ "where id = ?";
+		
+		PreparedStatement stmt = con.prepareStatement(sql);
+		
+		java.sql.Date data_inicio_Convertida = null;
+		try {
+			data_inicio_Convertida = new java.sql.Date(projeto.getDataInicio().getTime());
+		}catch (Exception e) {
+			System.out.println("Erro ao converter data: " + e);
+		}
+		
+		java.sql.Date data_fim_Convertida = null;
+		try {
+			data_fim_Convertida = new java.sql.Date(projeto.getDataFim().getTime());
+		}catch (Exception e) {
+			System.out.println("Erro ao converter data: " + e);
+		}
+		
+		stmt.setString(1, projeto.getNome());
+		stmt.setDate(2, data_inicio_Convertida);
+		stmt.setDate(3, data_fim_Convertida);
+		stmt.setInt(4, projeto.getEquipe().getId());
+		stmt.setInt(5, projeto.getId());
+
+		stmt.execute();
+		stmt.close();
+		
+		con.close();
+	}
+	
+	public void deletarUm(int id) throws SQLException{
+		String sql = "delete from projeto where id = ?";
+		PreparedStatement stmt = con.prepareStatement(sql);
+		
+		stmt.setInt(1, id);
+		stmt.execute();
+		stmt.close();
+		con.close();
+		
+		
+	}
+}

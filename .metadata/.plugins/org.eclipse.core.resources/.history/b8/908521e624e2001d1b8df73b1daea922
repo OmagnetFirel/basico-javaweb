@@ -1,0 +1,82 @@
+package br.devmanager.dao;
+import java.util.List;
+import java.util.ArrayList;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import br.devmanager.model.TechLead;
+import br.devmanager.model.Funcionario;
+import br.devmanager.dao.Desenvolvedor;
+
+public class TechLeadDao {
+	private Connection con = null;
+
+	public TechLeadDao() {
+		con = ConnectionFactory.getConnection();
+	}
+	
+	public void adicionar(TechLead gestor) throws SQLException {
+		
+		String sql = "insert into gestor"
+				+ "(nota,funcionarioId) "
+				+ "values (?,?)";
+		PreparedStatement stmt = con.prepareStatement(sql);
+		
+		
+		stmt.setFloat(1, gestor.getNota());
+		stmt.setInt(2, gestor.getFuncionario().getId());
+		
+		stmt.execute();
+		stmt.close();
+		con.close();
+		
+	}
+	
+	public TechLead buscarUm(int id) throws SQLException {
+		String sql = "select "
+				+ "idGestor,nota,funcionarioId"
+				+ " from gestor "
+				+ "where idGestor = ?";
+		PreparedStatement stmt = con.prepareStatement(sql);
+		stmt.setInt(1,id);
+		ResultSet rs = stmt.executeQuery();
+		TechLead lead = null;
+		if (rs.next()) {
+			Desenvolvedor funcionario = new Desenvolvedor();
+			try {
+				lead = new TechLead(
+						rs.getInt("idGestor"),
+						rs.getFloat("nota"),
+						funcionario.buscarUm(rs.getInt("funcionarioId"))
+				);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		stmt.close();
+		con.close();
+		return lead;
+	}
+	
+	public List<TechLead> buscarTodos() throws SQLException {
+		String sql = "select idGestor,nota,funcionarioId from gestor";
+		PreparedStatement stmt = con.prepareStatement(sql);
+		ResultSet rs = stmt.executeQuery();
+		List<TechLead> lideresDeSquad = new ArrayList<TechLead>();
+		while (rs.next()) {
+			TechLead lider = new TechLead();
+			Desenvolvedor funcDao = new Desenvolvedor();
+			Funcionario func = funcDao.buscarUm(rs.getInt("funcionarioId"));
+			lider.setId(rs.getInt("idGestor"));
+			lider.setNota(rs.getFloat("nota"));
+			lider.setFuncionario(func);
+			lideresDeSquad.add(lider);
+		}
+		stmt.close();
+		con.close();
+		return lideresDeSquad;
+		
+	}
+}

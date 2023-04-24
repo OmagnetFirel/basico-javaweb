@@ -1,0 +1,44 @@
+package br.devmanager.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import br.devmanager.model.ChefeDeTecnologia;
+import br.devmanager.model.Funcionario;
+
+public class ChefeDeTecnologiaDAO {
+private Connection con = null;
+	
+	public ChefeDeTecnologiaDAO() {
+		con = ConnectionFactory.getConnection();
+	}
+	
+	public void adicionar(ChefeDeTecnologia cto) throws SQLException {
+		String sql = "insert into cto(nome) values (?)";
+		PreparedStatement stmt = con.prepareStatement(sql);
+		stmt.setString(1, cto.getNome());
+		stmt.execute();
+		stmt.close();
+		con.close();
+	}
+	
+	public void promoverFuncionario(Funcionario funcionario) throws SQLException{
+		String sql = "insert into gestor(nota,funcionarioId) values(?,?)";
+		PreparedStatement stmt = con.prepareStatement(sql);
+		stmt.setFloat(1, 0);
+		stmt.setInt(2, funcionario.getId());
+		stmt.execute();
+		stmt.close();
+		con.close();
+	}
+	
+	public void demitirFuncionario(Funcionario funcionario) throws SQLException{
+		String sql = "delete from funcionario where id = ?";
+		PreparedStatement stmt = con.prepareStatement(sql);
+		stmt.setInt(1, funcionario.getId());
+		stmt.execute();
+		stmt.close();
+		con.close();
+	}
+}

@@ -1,0 +1,5 @@
+127.0.0.1 - - [18/Apr/2023:16:03:44 -0300] "GET / HTTP/1.1" 404 748
+0:0:0:0:0:0:0:1 - - [18/Apr/2023:16:03:45 -0300] "GET /DEVManager/index.html HTTP/1.1" 200 398
+0:0:0:0:0:0:0:1 - - [18/Apr/2023:16:03:45 -0300] "GET /favicon.ico HTTP/1.1" 404 759
+0:0:0:0:0:0:0:1 - - [18/Apr/2023:16:03:57 -0300] "GET /DEVManager/ListarTodosDesenvolvedores?np=/listarDesenvolvedors.jsp HTTP/1.1" 200 4635
+0:0:0:0:0:0:0:1 - - [18/Apr/2023:16:04:01 -0300] "GET /DEVManager/ListarTodasEquipes?np=/ListarTodosGestores?np=/frmCadastrarDesenvolvedor.jsp HTTP/1.1" 200 1652

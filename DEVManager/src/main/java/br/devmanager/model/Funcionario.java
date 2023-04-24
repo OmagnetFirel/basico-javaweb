@@ -1,0 +1,134 @@
+package br.devmanager.model;
+
+public class Funcionario {
+	private int id;
+	private int idade;
+	private String nome, genero, email, nivel;
+	private float salario;
+	private TechLead gestor = null;
+	private Equipe equipe = null;
+	public Funcionario(){}
+	
+	public Funcionario(
+			int idade, 
+			String nome, String genero, 
+			String email, String nivel,
+			float salario){
+		this.email = email;
+		this.nome = nome;
+		this.idade = idade;
+		this.salario = salario;
+		this.nivel = nivel;
+		if(genero.contains("M") || genero.contains("F")) {
+			this.genero = genero;
+		}
+	
+	}
+	
+	public Funcionario(
+					int idade, 
+					String nome, String genero, 
+					String email, String nivel,
+					float salario, Equipe equipe){
+				this.email = email;
+				this.nome = nome;
+				this.idade = idade;
+				this.salario = salario;
+				this.nivel = nivel;
+				if(genero.contains("M") || genero.contains("F")) {
+					this.genero = genero;
+				}
+				this.equipe = equipe;
+			}
+	
+	public Funcionario(
+			int id, int idade, 
+			String nome, String genero, 
+			String email, String nivel,
+			float salario){
+		this.email = email;
+		this.nome = nome;
+		this.idade = idade;
+		this.id = id;
+		this.salario = salario;
+		this.nivel = nivel;
+		if(genero.contains("M") || genero.contains("F")) {
+			this.genero = genero;
+		}
+	}
+	
+	Funcionario(
+			int id, int idade, 
+			String nome, String genero, 
+			String email, String nivel,
+			float salario, TechLead gestor){
+		this.email = email;
+		this.nome = nome;
+		this.idade = idade;
+		this.id = id;
+		this.salario = salario;
+		this.nivel = nivel;
+		if(genero.equalsIgnoreCase("M") || genero.equalsIgnoreCase("F")) {
+			this.genero = genero;
+		}else {
+			
+		}
+		this.gestor = gestor;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public int getIdade() {
+		return idade;
+	}
+	public void setIdade(int idade) {
+		this.idade = idade;
+	}
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	public String getGenero() {
+		return genero;
+	}
+	public void setGenero(String genero) {
+		this.genero = genero;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getNivel() {
+		return nivel;
+	}
+	public void setNivel(String nivel) {
+		this.nivel = nivel;
+	}
+	public float getSalario() {
+		return salario;
+	}
+	public void setSalario(float salario) {
+		this.salario = salario;
+	}
+	public TechLead getGestor() {
+		return gestor;
+	}
+	public void setGestor(TechLead gestor) {
+		this.gestor = gestor;
+	}
+
+	public Equipe getEquipe() {
+		return equipe;
+	}
+
+	public void setEquipe(Equipe equipe) {
+		this.equipe = equipe;
+	}
+}

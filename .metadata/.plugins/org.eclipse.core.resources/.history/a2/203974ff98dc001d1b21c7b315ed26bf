@@ -1,0 +1,12 @@
+
+<!DOCTYPE html5>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>TM - Home</title>
+</head>
+<body>
+	<a href="frmcadastrarcto.jsp">Cadastrar CTO</a><br>
+	<a href="ListarTodosGestores/ListarTodosGestores?np=/frmCadastrarDesenvolvedor.jsp">Cadastrar Desenvolvedor</a>
+</body>
+</html>

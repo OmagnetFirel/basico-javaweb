@@ -1,0 +1,29 @@
+package br.devmanager.dao;
+
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import br.devmanager.model.Projeto;
+
+public class ProjetoDao {
+	private Connection con = null;
+
+	public ProjetoDao() {
+		con = ConnectionFactory.getConnection();
+	}
+	
+	public void adicionar(Projeto projeto) throws SQLException {
+		String sql = "insert into projeto(nome, data_inicio, data_fim, equipe_id) values (?,?,?,?)";
+		PreparedStatement stmt = con.prepareStatement(sql);
+		stmt.setString(1, projeto.getNome());
+		stmt.setDate(1, (Date) projeto.getDataInicio());
+		stmt.setDate(1, (Date) projeto.getDataInicio());
+		stmt.setInt(1, projeto.getEquipe().getId());
+		stmt.execute();
+		stmt.close();
+		con.close();
+	}
+	
+}

@@ -1,0 +1,10 @@
+1682270085549	Encapsulate field 'id'
+1682280420608	Rename type 'EditarProjeto'
+1682280471600	Move 'frmcadastrarcto.jsp' to 'create'
+1682280473713	Move 'Cadastro.html' to 'create'
+1682280475404	Move 'Buscas.html' to 'read'
+1682280477253	Move 'frmCadastrarDesenvolvedor.jsp' to 'create'
+1682280478860	Move 'frmCadastrarProjeto.jsp' to 'create'
+1682280482299	Move 'listarDesenvolvedors.jsp' to 'read'
+1682280483996	Move 'listarProjetos.jsp' to 'read'
+1682295200697	Delete element
